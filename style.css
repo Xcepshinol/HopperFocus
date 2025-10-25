@@ -1,0 +1,50 @@
+body{
+    height: 100%;
+    margin: 0;
+
+}
+
+.nav-bar{
+    display: flex;
+    justify-content: space-between;
+    background:#abd3ff;
+
+    min-height: 10vh;
+}
+
+.logo{
+    display:flex;
+    position:relative;
+    align-items: center;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:5vh;
+    font-weight: bold;
+    color:white;
+}
+
+.profile{
+    display:flex;
+    align-items: center;
+
+    padding-right: 2vh;
+}
+
+.img{
+    max-width: 3.5vw;
+    max-height: 3.5vw;
+}
+
+.img-1{
+    max-width: 10vw;
+    max-height: 3.5vw;
+}
+
+.container{
+    outline: 1px solid black;
+    border-radius: 5px;
+    min-height: 84vh;
+    min-width: 80vw;
+
+    margin: 50px;
+}
