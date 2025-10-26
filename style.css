@@ -1,7 +1,6 @@
 body{
     height: 100%;
     margin: 0;
-
 }
 
 .nav-bar{
@@ -41,10 +40,52 @@ body{
 }
 
 .container{
-    outline: 1px solid black;
-    border-radius: 5px;
-    min-height: 84vh;
-    min-width: 80vw;
+    display:grid;
+    min-height: 82vh;
+    grid-template-columns: 59vw 36vw;
+    column-gap:2vw;
 
-    margin: 50px;
+    margin: 20px;
+}
+
+.container-left{
+    display:grid;
+    grid-template-rows: 50vh 29vh;
+    row-gap: 4vh;
+}
+
+.container-right{
+    display:grid;
+    grid-template-rows: 30vh 49vh;
+    row-gap: 4vh;
+}
+
+.Task{
+    outline: 1px solid black;
+    border-radius: 20px;
+    padding: 10px;
+
+    background: rgb(208, 208, 208);
+}
+
+.Events{
+    outline: 1px solid black;
+    border-radius: 20px;
+    padding: 10px;
+
+    background: rgb(208, 208, 208);
+}
+
+.Timer{
+    outline: 1px solid black;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.Leaderboard{
+    outline: 1px solid black;
+    border-radius: 20px;
+    padding: 10px;
+
+    background: rgb(208, 208, 208);
 }
