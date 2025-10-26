@@ -60,32 +60,519 @@ body{
     row-gap: 4vh;
 }
 
-.Task{
-    outline: 1px solid black;
-    border-radius: 20px;
-    padding: 10px;
-
-    background: rgb(208, 208, 208);
+.Task-header-bar {
+    padding: 10px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #abd3ff;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    color: white;
 }
 
-.Events{
-    outline: 1px solid black;
-    border-radius: 20px;
-    padding: 10px;
+.WorkList h3 {
+    font-family: Arial, Helvetica, sans-serif;
+}
 
-    background: rgb(208, 208, 208);
+.Task {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.Task .tabcontent {
+    flex: 1;
+    overflow-y: auto;
+    max-height: 340px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.tab {
+    overflow: hidden;
+    background-color: #f7f7f7;
+}
+
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 14px;
+    transition: 0.3s;
+    font-size: 14px;
+}
+
+.tab button:hover {
+    background-color: #abd3ff;
+}
+
+.tab button.active {
+    background-color: #6faff2;
+}
+
+.tabcontent {
+    display: none;
+    padding: 10px;
+}
+
+.header {
+    text-align: center;
+    background-color: #abd3ff;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+input {
+    width: 70%;
+    padding: 8px;
+    border: none;
+    font-size: 14px;
+    border-radius: 6px;
+}
+
+.addBtn {
+    width: 25%;
+    padding: 8px;
+    background: #d9d9d9;
+    color: #555;
+    font-size: 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.addBtn:hover {
+    background-color: #6faff2;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+ul li {
+    cursor: pointer;
+    position: relative;
+    padding: 10px 8px 10px 35px;
+    list-style-type: none;
+    background: #eee;
+    font-size: 15px;
+    border-radius: 6px;
+    margin-top: 5px;
+}
+
+ul li:nth-child(odd) {
+    background: #f9f9f9;
+}
+
+ul li.checked {
+    background: #a0cc7a;
+    color: #fff;
+    text-decoration: line-through;
+}
+
+ul li.checked::before {
+    content: '';
+    position: absolute;
+    border-color: #fff;
+    border-style: solid;
+    border-width: 0 2px 2px 0;
+    top: 8px;
+    left: 12px;
+    transform: rotate(45deg);
+    height: 12px;
+    width: 6px;
+}
+
+.close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 8px 12px;
+}
+
+.close:hover {
+    background-color: #f44336;
+    color: white;
+}
+
+.Events {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: #abd3ff;
+    border: none;
+    font-family: Helvetica, Arial, sans-serif;
 }
 
 .Timer{
-    outline: 1px solid black;
-    border-radius: 20px;
-    padding: 10px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:10vh;
+    font-weight: 400;
+    color:rgb(144, 176, 245);
+}
+
+.img-2{
+    height: 15vh;
+    width: 33vw;
+}
+
+.Leaderboard-header{
+    padding: 10px 16px;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #abd3ff;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:13px;
+    font-weight:500;
+    letter-spacing: 1.5px;
+    color: white;
 }
 
 .Leaderboard{
-    outline: 1px solid black;
+    display: grid;
+    grid-template-rows: auto 1fr;
     border-radius: 20px;
-    padding: 10px;
+    background: rgb(240, 240, 240);
+}
 
-    background: rgb(208, 208, 208);
+.Leaderboard-body {
+    display: flex;
+    flex-direction: column;
+    min-height: 0; /* critical so the child flex can actually shrink */
+}
+
+/* Scrollable middle */
+.lb-scroll {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    min-height: 0; /* critical for overflow to work in flex parents */
+    padding: 8px 0;
+}
+
+/* Pinned rows */
+.lb-pin {
+    padding: 8px 12px;
+    background: #f7fbff;
+    border-top: 1px solid #e1f0ff;
+    border-bottom: 1px solid #e1f0ff;
+}
+
+.lb-pin--top {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.lb-pin--bottom {
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+/* A single row (used for both pins and middle entries) */
+.lb-row {
+    display: grid;
+    grid-template-columns: 40px 1fr auto;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #333;
+}
+
+.lb-rank {
+    font-weight: 700;
+    text-align: center;
+}
+
+.lb-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.lb-value {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.5px;
+    color: #2d5f9a;
+}
+
+/* Light separators for the scroll list rows */
+.lb-scroll .lb-row + .lb-row {
+    border-top: 1px solid #eaeaea;
+}
+
+
+/* ---------- Blur target when modal is open ---------- */
+
+
+/* If you want the whole page blurred, wrap your main content in a div.blur-target.
+   You already have .nav-bar and .container; we’ll just mark both as blur targets via JS. */
+
+/* ---------- Modal shell ---------- */
+.lb-modal {
+  position: fixed;
+  inset: 0;
+  display: none;            /* hidden by default */
+  z-index: 9999;
+}
+
+.lb-modal.open {
+  display: block;
+}
+
+/* Backdrop uses backdrop-filter to blur behind itself (nice on modern browsers) */
+.lb-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 32, 48, 0.35);
+  backdrop-filter: blur(4px);
+}
+
+/* Dialog box */
+.lb-modal__dialog {
+  position: relative;
+  margin: 6vh auto;
+  width: min(92vw, 800px);
+  height: min(86vh, 860px);
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 14px 50px rgba(0,0,0,0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Header */
+.lb-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  background: #87c0fd;
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 1px;
+}
+
+.lb-modal__close {
+  border: none;
+  background: transparent;
+  color: #fff;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* Content (scrolls) */
+.lb-modal__content {
+  padding: 10px 0;
+  overflow: auto;
+  flex: 1 1 auto;
+  background: #f7fbff;
+}
+
+/* Full list rows */
+.lb-list .lb-row {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  background: #fff;
+  margin: 8px 14px;
+  border-radius: 10px;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  color: #333;
+}
+
+.lb-list .lb-row .lb-rank {
+  font-weight: 700;
+  text-align: center;
+  background: #e9f3ff;
+  border-radius: 8px;
+  padding: 8px 0;
+}
+
+.lb-list .lb-row .lb-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lb-list .lb-row .lb-value {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.3px;
+  color: #2d5f9a;
+}
+
+/* Optional highlights */
+.lb-row--best { outline: 2px solid #6bbd52; }
+.lb-row--worst { outline: 2px solid #d66; }
+
+/* Two-column modal content */
+.lb-modal__content {
+  display: grid;
+  grid-template-columns: 1.75fr 1.25fr; /* left : right */
+  gap: 14px;
+  padding: 14px;         /* moved from before; keep scroll behavior if needed */
+  overflow: hidden;      /* contain panel scrolls */
+}
+
+/* Left panel blank area (you can style later as needed) */
+.lb-panel-left {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 8vh;
+  color: #333;
+}
+
+
+.img-3{
+    max-width: 15vw;
+    max-height: 13vh;
+}
+
+.img-4{
+    width: 25vw;
+    height: 15vh;
+}
+
+.img-5{
+    max-width: 15vw;
+    max-height: 13vh;
+}
+
+.img-6{
+    width: 25vw;
+    height: 15vh;
+}
+
+/* Right panel scroll area with the list */
+.lb-panel-right {
+  background: #f7fbff;
+  border-radius: 10px;
+  overflow: hidden;      /* keeps child corners tidy */
+  display: flex;
+  flex-direction: column;
+}
+
+.lb-panel-right .lb-list {
+  overflow: auto;
+  padding: 8px 0;
+  flex: 1 1 auto;
+}
+
+/* Row base (already used) */
+.lb-list .lb-row {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  background: #fff;
+  margin: 8px 14px;
+  border-radius: 10px;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  color: #333;
+  border: 1px solid transparent; /* so highlight borders don’t shift layout */
+}
+
+.lb-list .lb-row .lb-rank {
+  font-weight: 700;
+  text-align: center;
+  background: #e9f3ff;
+  border-radius: 8px;
+  padding: 8px 0;
+}
+
+/* Green = best, Red = worst */
+.lb-row--best {
+  background: #eaf7ea;
+  border-color: #b6e0b6;
+}
+.lb-row--best .lb-name,
+.lb-row--best .lb-value { color: #2b7a2b; }
+
+.lb-row--worst {
+  background: #fdeaea;
+  border-color: #f3b5b5;
+}
+.lb-row--worst .lb-name,
+.lb-row--worst .lb-value { color: #a33; }
+
+
+.lb-full-right {
+  display: flex;
+  flex-direction: column;
+  min-height: 0; /* enables child overflow */
+}
+
+#lb-full-scroll {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+#lb-full-top .lb-row {
+  border: 2px solid #61ff69;
+  color: #61ff69;
+  border-radius: 10px;          /* round all corners */
+  box-sizing: border-box;       /* ensures consistent sizing */
+  background: #fff;
+}
+
+/* Worst (most hours) — red outline + rounded corners */
+#lb-full-bottom .lb-row {
+  border: 2px solid #fb5b5b;
+  color: #fb5b5b;
+  border-radius: 10px;          /* round all corners */
+  box-sizing: border-box;
+  background: #fff;
+}
+
+/* Optional: make name/value text also match color */
+#lb-full-top .lb-row .lb-name,
+#lb-full-top .lb-row .lb-value {
+  color: #61ff69;
+}
+#lb-full-bottom .lb-row .lb-name,
+#lb-full-bottom .lb-row .lb-value {
+  color: #fb5b5b;
+}
+
+.lb-panel-left{
+
 }

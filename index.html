@@ -7,6 +7,229 @@
 
     <link href="style.css" rel="stylesheet">
     <script src="script.js" defer></script>
+
+    <style>
+        .Events {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            background: #abd3ff;
+            border: none;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+        
+        .calendar-auth-buttons {
+            margin: 10px 0;
+            display: flex;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+        
+        .calendar-auth-buttons button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-family: Helvetica, Arial, sans-serif;
+            transition: all 0.2s ease;
+        }
+        
+        #calendar_authorize_button {
+            background: #4285f4;
+            color: white;
+        }
+        
+        #calendar_authorize_button:hover {
+            background: #3367d6;
+            transform: translateY(-1px);
+        }
+        
+        #calendar_signout_button {
+            background: #ea4335;
+            color: white;
+        }
+        
+        #calendar_signout_button:hover {
+            background: #d33426;
+            transform: translateY(-1px);
+        }
+        
+        #calendar_status {
+            display: none;
+        }
+        
+        #calendar_content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+        
+        .event-navigation {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin: 10px 0;
+            width: 100%;
+        }
+        
+        .nav-arrow {
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: #4285f4;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+            font-weight: bold;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+        
+        .nav-arrow:hover {
+            background-color: #f0f7ff;
+            transform: scale(1.1);
+        }
+        
+        .nav-arrow:disabled {
+            color: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .nav-arrow:disabled:hover {
+            background-color: transparent;
+            transform: none;
+        }
+        
+        .event-display {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 0 20px;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+        
+        .event-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 320px;
+            width: 100%;
+            border: 1px solid #e0e0e0;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+        
+        .event-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+        }
+        
+        .event-date {
+            font-size: 14px;
+            color: #5f6368;
+            margin-bottom: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+        
+        .event-title {
+            font-size: 20px;
+            color: #202124;
+            margin-bottom: 16px;
+            font-weight: 600;
+            line-height: 1.4;
+            word-wrap: break-word;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+        
+        .event-time {
+            font-size: 15px;
+            color: #5f6368;
+            padding: 8px 12px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            display: inline-block;
+            font-weight: 500;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+        
+        .event-counter {
+            font-size: 13px;
+            color: #9aa0a6;
+            margin-top: 20px;
+            padding-top: 12px;
+            border-top: 1px solid #f0f0f0;
+            width: 100%;
+            text-align: center;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+        
+        .calendar-loading {
+            text-align: center;
+            color: #4285f4;
+            padding: 40px 20px;
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 16px;
+        }
+        
+        .calendar-no-events {
+            text-align: center;
+            color: #6c757d;
+            font-style: italic;
+            padding: 40px 20px;
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            max-width: 300px;
+            width: 100%;
+        }
+        
+        .calendar-error {
+            text-align: center;
+            color: #d33426;
+            padding: 40px 20px;
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            max-width: 300px;
+            width: 100%;
+        }
+        
+        .event-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 16px;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+        
+        .event-type {
+            font-size: 12px;
+            color: #4285f4;
+            background: #e8f0fe;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+    </style>
 </head>
 <body>
     <div class="nav-bar">
@@ -22,16 +245,357 @@
     <div class="container">
         <div class="container-left">
             <div class="Task">
-                Tasks
-                <div class="work active"></div>
-                <div class="personal"></div>
+                <div class="Task-header-bar">Tasks</div>
+
+                        <div class="tab">
+                        <button class="tablinks" onclick="openTab(event, 'Work')">Work</button>
+                        <button class="tablinks" onclick="openTab(event, 'School')">School</button>
+                        <button class="tablinks" onclick="openTab(event, 'Personal')">Personal</button>
+                        <button class="tablinks" onclick="openTab(event, '+')">+</button>
+                        </div>
+
+                        <div id="Work" class="tabcontent">
+                        <div class="header">
+                            <h3>Work To-Do</h3>
+                            <input type="text" id="WorkInput" placeholder="Let's hop to it!">
+                            <button class="addBtn" onclick="addTask('Work')">Add</button>
+                        </div>
+                        <ul id="WorkList"></ul>
+                        </div>
+
+                        <div id="School" class="tabcontent">
+                        <div class="header">
+                            <h3>School To-Do</h3>
+                            <input type="text" id="SchoolInput" placeholder="Add new task...">
+                            <button class="addBtn" onclick="addTask('School')">Add</button>
+                        </div>
+                        <ul id="SchoolList"></ul>
+                        </div>
+
+                        <div id="Personal" class="tabcontent">
+                        <div class="header">
+                            <h3>Personal To-Do</h3>
+                            <input type="text" id="PersonalInput" placeholder="Add new task...">
+                            <button class="addBtn" onclick="addTask('Personal')">Add</button>
+                        </div>
+                        <ul id="PersonalList"></ul>
+                        </div>
+                    </div>
+
+                    <div class="Events">
+                        <div class="calendar-auth-buttons">
+                            <button id="calendar_authorize_button" onclick="handleCalendarAuthClick()">Connect Calendar</button>
+                            <button id="calendar_signout_button" onclick="handleCalendarSignoutClick()">Disconnect</button>
+                        </div>
+                        <div id="calendar_status" class="calendar-status"></div>
+                        <div id="calendar_content"></div>
+                    </div>
+                <script type="text/javascript">
+                    const CALENDAR_CLIENT_ID = '688961306341-b473admeg7gl27f7gg81sf2b2t7hqqe0.apps.googleusercontent.com';
+                    const CALENDAR_API_KEY = 'AIzaSyAMq2RfGWxTeaMKzjH4pwGZyFDfkHAd9EY';
+                    const CALENDAR_DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest';
+                    const CALENDAR_SCOPES = 'https://www.googleapis.com/auth/calendar.readonly';
+
+                    let calendarTokenClient;
+                    let calendarGapiInited = false;
+                    let calendarGisInited = false;
+                    let currentEvents = [];
+                    let currentEventIndex = 0;
+
+                    document.getElementById('calendar_authorize_button').style.visibility = 'hidden';
+                    document.getElementById('calendar_signout_button').style.visibility = 'hidden';
+                    document.getElementById('calendar_content').innerHTML = '<div class="calendar-no-events">Connect your Google Calendar to view events</div>';
+
+                    function gapiLoaded() {
+                        gapi.load('client', initializeCalendarGapiClient, function(error) {
+                            console.error('Error loading Google API:', error);
+                        });
+                    }
+
+                    async function initializeCalendarGapiClient() {
+                        try {
+                            await gapi.client.init({
+                                apiKey: CALENDAR_API_KEY,
+                                discoveryDocs: [CALENDAR_DISCOVERY_DOC],
+                            });
+                            calendarGapiInited = true;
+                            maybeEnableCalendarButtons();
+                        } catch (error) {
+                            console.error('Error initializing Calendar API:', error);
+                        }
+                    }
+
+                    function gisLoaded() {
+                        try {
+                            calendarTokenClient = google.accounts.oauth2.initTokenClient({
+                                client_id: CALENDAR_CLIENT_ID,
+                                scope: CALENDAR_SCOPES,
+                                callback: '',
+                            });
+                            calendarGisInited = true;
+                            maybeEnableCalendarButtons();
+                        } catch (error) {
+                            console.error('Error initializing authentication:', error);
+                        }
+                    }
+
+                    function maybeEnableCalendarButtons() {
+                        if (calendarGapiInited && calendarGisInited) {
+                            document.getElementById('calendar_authorize_button').style.visibility = 'visible';
+                        }
+                    }
+
+                    function handleCalendarAuthClick() {
+                        calendarTokenClient.callback = async (resp) => {
+                            if (resp.error !== undefined) {
+                                console.error('Authorization error:', resp);
+                                return;
+                            }
+                            
+                            document.getElementById('calendar_signout_button').style.visibility = 'visible';
+                            document.getElementById('calendar_authorize_button').innerText = 'Refresh Events';
+                            
+                            document.querySelector('.calendar-auth-buttons').style.display = 'none';
+                            
+                            await listCalendarEvents();
+                        };
+
+                        if (gapi.client.getToken() === null) {
+                            calendarTokenClient.requestAccessToken({prompt: 'consent'});
+                        } else {
+                            calendarTokenClient.requestAccessToken({prompt: ''});
+                        }
+                    }
+
+                    function handleCalendarSignoutClick() {
+                        const token = gapi.client.getToken();
+                        if (token !== null) {
+                            google.accounts.oauth2.revoke(token.access_token);
+                            gapi.client.setToken('');
+                            document.getElementById('calendar_content').innerHTML = '<div class="calendar-no-events">Connect your Google Calendar to view events</div>';
+                            document.getElementById('calendar_authorize_button').innerText = 'Connect Calendar';
+                            document.getElementById('calendar_signout_button').style.visibility = 'hidden';
+                            document.querySelector('.calendar-auth-buttons').style.display = 'flex';
+                            currentEvents = [];
+                            currentEventIndex = 0;
+                        }
+                    }
+
+                    async function listCalendarEvents() {
+                        document.getElementById('calendar_content').innerHTML = '<div class="calendar-loading">Loading events...</div>';
+
+                        if (!gapi.client || !gapi.client.calendar) {
+                            document.getElementById('calendar_content').innerHTML = '<div class="calendar-error">Calendar API not loaded properly</div>';
+                            return;
+                        }
+
+                        let response;
+                        try {
+                            const nowTime = new Date();
+                            const nextWeekTime = new Date(nowTime.getTime() + 7 * 24 * 60 * 60 * 1000);
+                            
+                            const request = {
+                                'calendarId': 'primary',
+                                'timeMin': nowTime.toISOString(),
+                                'timeMax': nextWeekTime.toISOString(),
+                                'showDeleted': false,
+                                'singleEvents': true,
+                                'maxResults': 50,
+                                'orderBy': 'startTime',
+                            };
+                            
+                            response = await gapi.client.calendar.events.list(request);
+                            
+                        } catch (err) {
+                            let errorMessage = err.message;
+                            if (err.result && err.result.error) {
+                                errorMessage = err.result.error.message;
+                            }
+                            document.getElementById('calendar_content').innerHTML = `<div class="calendar-error">Error loading events: ${errorMessage}</div>`;
+                            return;
+                        }
+
+                        currentEvents = response.result.items || [];
+                        currentEventIndex = 0;
+
+                        if (currentEvents.length === 0) {
+                            document.getElementById('calendar_content').innerHTML = '<div class="calendar-no-events">No events this week</div>';
+                            return;
+                        }
+
+                        displayCurrentEvent();
+                    }
+
+                    function displayCurrentEvent() {
+                        if (currentEvents.length === 0) return;
+
+                        const event = currentEvents[currentEventIndex];
+                        const title = event.summary || 'Untitled Event';
+                        const start = event.start.dateTime || event.start.date;
+                        
+                        const eventDate = new Date(start);
+                        const formattedDate = eventDate.toLocaleDateString('en-US', { 
+                            weekday: 'long', 
+                            month: 'short', 
+                            day: 'numeric',
+                            year: 'numeric'
+                        });
+                        
+                        const timeText = formatEventTime(start);
+                        const eventType = (event.start.dateTime) ? 'Timed Event' : 'All Day';
+
+                        const html = `
+                            <div class="event-navigation">
+                                <button class="nav-arrow" onclick="previousEvent()" ${currentEventIndex === 0 ? 'disabled' : ''}>‹</button>
+                                <div class="event-display">
+                                    <div class="event-card">
+                                        <div class="event-date">${formattedDate}</div>
+                                        <div class="event-title">${title}</div>
+                                        <div class="event-time">${timeText}</div>
+                                        <div class="event-meta">
+                                            <div class="event-type">${eventType}</div>
+                                            <div class="event-counter">${currentEventIndex + 1} of ${currentEvents.length}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="nav-arrow" onclick="nextEvent()" ${currentEventIndex === currentEvents.length - 1 ? 'disabled' : ''}>›</button>
+                            </div>
+                        `;
+                        
+                        document.getElementById('calendar_content').innerHTML = html;
+                    }
+
+                    function nextEvent() {
+                        if (currentEventIndex < currentEvents.length - 1) {
+                            currentEventIndex++;
+                            displayCurrentEvent();
+                        }
+                    }
+
+                    function previousEvent() {
+                        if (currentEventIndex > 0) {
+                            currentEventIndex--;
+                            displayCurrentEvent();
+                        }
+                    }
+
+                    function formatEventTime(start) {
+                        if (start && typeof start === 'string') {
+                            if (start.includes('T')) {
+                                const startDate = new Date(start);
+                                return startDate.toLocaleTimeString('en-US', { 
+                                    hour: 'numeric', 
+                                    minute: '2-digit',
+                                    hour12: true 
+                                });
+                            } else {
+                                return 'All day';
+                            }
+                        }
+                        return '';
+                    }
+                </script>
+                
+                <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
+                <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
+
+                <script>
+                    function openTab(evt, name) {
+                    const tabcontent = document.getElementsByClassName("tabcontent");
+                    for (let i = 0; i < tabcontent.length; i++) {
+                        tabcontent[i].style.display = "none";
+                    }
+
+                    const tablinks = document.getElementsByClassName("tablinks");
+                    for (let i = 0; i < tablinks.length; i++) {
+                        tablinks[i].className = tablinks[i].className.replace(" active", "");
+                    }
+
+                    document.getElementById(name).style.display = "block";
+                    evt.currentTarget.className += " active";
+                    }
+
+                    document.addEventListener("DOMContentLoaded", () => {
+                    document.querySelector(".tablinks").click();
+                    });
+
+                    function addTask(tab) {
+                    const input = document.getElementById(tab + "Input");
+                    const list = document.getElementById(tab + "List");
+                    const value = input.value.trim();
+
+                    if (!value) return alert("Please enter a task!");
+
+                    const li = document.createElement("li");
+                    li.textContent = value;
+
+                    const span = document.createElement("SPAN");
+                    span.className = "close";
+                    span.textContent = "\u00D7";
+                    li.appendChild(span);
+                    list.appendChild(li);
+                    input.value = "";
+
+                    span.onclick = function() { li.remove(); };
+                    }
+
+                    document.addEventListener("click", function(e) {
+                    if (e.target.tagName === "LI") {
+                        e.target.classList.toggle("checked");
+                    }
+                    });
+                </script>
             </div>
-            <div class="Events">Events</div>
-        </div>
+
         <div class="container-right">
-            <div class="Timer"></div>
-            <div class="Leaderboard">Leaderboard</div>
+            <div class="Timer">
+                10H 08M
+                <img class="img-2" src="good_carrot.png"/>
+            </div>
+            <div class="Leaderboard">
+                <div class="Leaderboard-header">Leaderboard</div>
+                <div class="Leaderboard-body">
+                    <div class="lb-pin lb-pin--top" id="lb-top"></div>
+                    <div class="lb-scroll" id="lb-scroll"></div>
+                    <div class="lb-pin lb-pin--bottom" id="lb-bottom"></div>
+                </div>
+            </div>
         </div>
     </div>
+<!-- Full Leaderboard Modal -->
+<div class="lb-modal" id="lb-modal" aria-hidden="true">
+  <div class="lb-modal__backdrop" id="lb-backdrop"></div>
+
+  <div class="lb-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="lb-modal-title">
+    <div class="lb-modal__header">
+      <h2 id="lb-modal-title">Leaderboard</h2>
+      <button class="lb-modal__close" id="lb-close" aria-label="Close leaderboard">&times;</button>
+    </div>
+
+    <div class="lb-modal__content">
+        <div class="lb-panel-left" id="lb-left-panel">
+            <div class="top-modal">
+                <div class="top">
+                    <img class="img-3" src="fire_bunny.png"/>
+                    Locked In: 1
+                </div>
+                <img class="img-4" src="good_carrot.png"/> 
+            </div>
+            <div class="bottom-modal">
+                <div class="bottom">
+                    <img class="img-5" src="sad_bunny.png"/>
+                    Bummy: 15
+                </div>
+                <img class="img-6" src="bad_carrot.png"/>
+            </div>
+        </div>
+        <div class="lb-panel-right">
+            <div id="lb-full-top"></div>
+            <div id="lb-full-scroll"></div>
+            <div id="lb-full-bottom"></div>
+        </div>
+    </div>
+</div>
+</div>
 </body>
 </html>
